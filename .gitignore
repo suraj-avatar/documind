@@ -35,6 +35,7 @@ Thumbs.db
 
 # ── Node / React frontend ────────────────────────────────────
 node_modules/          # global — catches frontend/node_modules and any root-level installs
+dist/
 frontend/dist/
 frontend/.env
 frontend/.env.local
