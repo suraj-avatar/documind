@@ -34,7 +34,8 @@ bm25_cache.pkl
 Thumbs.db
 
 # ── Node / React frontend ────────────────────────────────────
-node_modules/          # global — catches frontend/node_modules and any root-level installs
+# Excludes node_modules anywhere in the repo (frontend/ or root)
+node_modules/
 frontend/dist/
 frontend/.env
 frontend/.env.local
