@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 import os
-from langchain_openai import ChatOpenAI
 from langchain_groq import ChatGroq
 from langchain_core.messages import SystemMessage, HumanMessage
 
@@ -13,11 +12,9 @@ from retrieval.hybrid_retriever import hybrid_search
 # (0.5 was too high and caused hallucinations)
 # ------------------------
 
-# llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.1)
-
 llm = ChatGroq(
     model="llama-3.1-8b-instant",
-    temperature=0.1       # was 0.5 — lowered to reduce hallucinations
+    temperature=0.1
 )
 
 # ------------------------
