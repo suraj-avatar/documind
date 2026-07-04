@@ -12,7 +12,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc g++ curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Python deps (CPU-only torch to save ~1.5GB vs CUDA build)
+# Install Python deps
+# CPU-only torch first (saves ~1.5GB vs CUDA build)
 COPY requirements.txt .
 RUN pip install --no-cache-dir torch==2.11.0 --index-url https://download.pytorch.org/whl/cpu && \
     pip install --no-cache-dir -r requirements.txt
@@ -20,13 +21,13 @@ RUN pip install --no-cache-dir torch==2.11.0 --index-url https://download.pytorc
 # Copy application source
 COPY app/ ./app/
 
-# Copy pre-built vectorstore, parent store, and BM25 cache
-# These are built once via ingest.py and committed to the deployment volume
-COPY vectorstore/ ./vectorstore/
-COPY parent_store/ ./parent_store/
-COPY bm25_cache.pkl ./bm25_cache.pkl
+# Create empty directories for the vectorstore and document store.
+# These are populated at runtime via the POST /upload endpoint.
+# In production, mount a Railway volume at /app/vectorstore and
+# /app/parent_store so data persists across deploys.
+RUN mkdir -p /app/vectorstore /app/parent_store
 
-# Health check — Railway/Docker will mark container unhealthy if /health fails
+# Health check — Railway marks the container unhealthy if /health fails
 HEALTHCHECK --interval=30s --timeout=10s --start-period=90s --retries=3 \
     CMD curl -f http://localhost:8000/health || exit 1
 
