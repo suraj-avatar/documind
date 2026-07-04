@@ -1,0 +1,30 @@
+# Files excluded from the Docker build context
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Git
+.git/
+.gitignore
+
+# Secrets
+.env
+.env.*
+
+# Virtual environments
+venv/
+ragenv/
+ragenv2/
+
+# ML stores (mounted as volumes in production)
+vectorstore/
+parent_store/
+bm25_cache.pkl
+
+# Node / Frontend — not needed in the Python backend image
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.env*
