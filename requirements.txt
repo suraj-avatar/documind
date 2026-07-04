@@ -1,0 +1,42 @@
+# ============================================================
+# RAG API — Direct Dependencies Only
+# (Transitive deps are resolved automatically by pip)
+# ============================================================
+
+# Core API framework
+fastapi==0.136.1
+uvicorn[standard]==0.46.0
+python-multipart==0.0.27
+pydantic-settings==2.14.0
+python-dotenv==1.2.2
+aiofiles==25.1.0
+
+# LangChain ecosystem
+langchain==1.3.1
+langchain-core==1.4.0
+langchain-groq==1.1.2
+langchain-huggingface==1.2.2
+langchain-chroma==1.1.0
+langchain-classic==1.0.7
+langchain-text-splitters==1.1.2
+langchain-community==0.4.2
+
+# Vector store
+chromadb==1.5.8
+
+# Embeddings & reranking
+sentence-transformers==5.4.1
+rank-bm25==0.2.2
+
+# Document loading
+pypdf==6.10.2
+
+# ML framework
+# For CPU-only (used in Docker / deployment):
+#   pip install torch==2.11.0 --index-url https://download.pytorch.org/whl/cpu
+# For local dev with GPU, install standard:
+torch==2.11.0
+
+# Testing (dev only)
+pytest==8.3.5
+httpx==0.28.1
